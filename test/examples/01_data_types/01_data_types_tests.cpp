@@ -1,8 +1,11 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
+#include "int.h" // i have access to the echo_variable gunction in my library
 
-TEST_CASE("Verify Test Configuration", "verification") {
-	REQUIRE(true == true);
+TEST_CASE("Test echo variable function", "function should return the same value as the function argument") {
+	REQUIRE(5 == echo_variable(5));
+	REQUIRE(50 == echo_variable(50));
+	REQUIRE(500 == echo_variable(500));
 }
 
 /*test case echo_variable */
