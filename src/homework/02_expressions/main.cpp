@@ -2,6 +2,8 @@
 #include <iostream>
 #include "hwexpressions.h"
 
+using std::cout;
+using std::cin;
 
 //write namespace using statement for cout
 
