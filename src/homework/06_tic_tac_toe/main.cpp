@@ -1,12 +1,13 @@
+#include <iostream>
 #include "tic_tac_toe.h"
 
 int main() {
     char play_again;
-    
+
     do {
         TicTacToe game;
         string first_player;
-        
+
         cout << "Welcome to Tic-Tac-Toe!\n";
         cout << "Enter the first player (X or O): ";
         cin >> first_player;
@@ -15,7 +16,7 @@ int main() {
 
         while (!game.game_over()) {
             int position;
-            
+
             cout << "Current board:\n";
             game.display_board();
 
@@ -27,6 +28,13 @@ int main() {
 
         cout << "Game over!\n";
         game.display_board();
+
+        string winner = game.get_winner();
+        if (winner == "C") {
+            cout << "It's a tie!\n";
+        } else {
+            cout << "Player " << winner << " wins!\n";
+        }
 
         cout << "Play again? (Y/N): ";
         cin >> play_again;
