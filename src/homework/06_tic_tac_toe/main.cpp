@@ -1,46 +1,39 @@
 #include <iostream>
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 
 int main() {
-    char play_again;
+    TicTacToeManager manager;
+    char choice;
 
     do {
         TicTacToe game;
-        string first_player;
+        game.start_game("X");
 
-        cout << "Welcome to Tic-Tac-Toe!\n";
-        cout << "Enter the first player (X or O): ";
-        cin >> first_player;
-
-        game.start_game(first_player);
-
-        while (!game.game_over()) {
+        do {
             int position;
+            std::cout << "Player " << game.get_player() << ", enter your position (1-9): ";
+            std::cin >> position;
 
-            cout << "Current board:\n";
-            game.display_board();
+            if (game.mark_board(position)) {
+                std::cout << game;
+            } else {
+                std::cout << "Invalid move. Try again.\n";
+            }
+        } while (!game.game_over());
 
-            cout << "Player " << game.get_player() << ", enter a position (1-9): ";
-            cin >> position;
+        manager.save_game(game);
 
-            game.mark_board(position);
-        }
+        int x_total, o_total, tie_total;
+        manager.get_winner_total(x_total, o_total, tie_total);
 
-        cout << "Game over!\n";
-        game.display_board();
+        std::cout << "X wins: " << x_total << ", O wins: " << o_total << ", Ties: " << tie_total << "\n";
 
-        string winner = game.get_winner();
-        if (winner == "C") {
-            cout << "It's a tie!\n";
-        } else {
-            cout << "Player " << winner << " wins!\n";
-        }
+        std::cout << "Play again? (y/n): ";
+        std::cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
 
-        cout << "Play again? (Y/N): ";
-        cin >> play_again;
-    } while (play_again == 'Y' || play_again == 'y');
-
-    cout << "Thanks for playing Tic-Tac-Toe!\n";
+    std::cout << manager;
 
     return 0;
 }

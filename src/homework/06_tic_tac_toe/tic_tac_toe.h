@@ -3,36 +3,28 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
-
-using std::string;
-using std::vector;
-using std::cin;
-using std::cout;
 
 class TicTacToe {
 public:
     TicTacToe();
+    void start_game(std::string first_player);
+    bool mark_board(int position);
+    std::string get_player() const;
+    std::string get_winner() const;
     bool game_over();
-    void start_game(string first_player);
-    void mark_board(int position);
-    string get_player();
-    void display_board();
-    string get_winner();
-    bool check_column_win();
-    
-private:
-    string player;
-    vector<string> pegs;
-    string winner;
+    friend std::ostream& operator<<(std::ostream& out, const TicTacToe& game);
 
-    void set_winner();
-    void set_next_player();
-    bool check_board_full();
-    
+private:
+    std::vector<std::string> pegs;
+    std::string player;
+    std::string winner;
+
+    bool check_board_full() const;
+    bool check_column_win();
     bool check_row_win();
     bool check_diagonal_win();
-    void clear_board();
+    void set_next_player();
+    void set_winner();
 };
 
 #endif
